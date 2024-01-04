@@ -9,7 +9,8 @@ React.createElement('div',{id:'child'},
 
 )
 );
-
+//Using JSX 
+//JSX => React.createElement() => html element
 const jsx = <h1>Hey JSX</h1>
 console.log(jsx)
 
