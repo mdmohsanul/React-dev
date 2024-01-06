@@ -2,12 +2,10 @@
   "name": "react-dev",
   "version": "1.0.0",
   "description": "namaste react",
-  
   "scripts": {
-    "start":"parcel index.html",
-    "build":"parcel build index.html",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
-  
   },
   "author": "",
   "license": "ISC",
@@ -17,9 +15,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "process": "^0.11.10"
+    "postcss": "^8.4.33",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.0"
   },
-  "browserslist" : [
+  "browserslist": [
     "last 2 versions"
   ]
 }
