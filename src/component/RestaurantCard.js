@@ -25,4 +25,18 @@ const RestaurantCard = (props) => {
   )
 }
 
+//Higher Order Function
+// input -- Restaurant Card ==> restaurantCardWithDiscount
+export const cardWithDiscount = (RestaurantCard) =>{
+
+  return (props) =>{
+      return (
+        <div>
+          <label className="absolute p-1 bg-black text-white">Promoted</label>
+          <RestaurantCard {...props}/>
+        </div>
+      )
+  }
+}
+
 export default RestaurantCard

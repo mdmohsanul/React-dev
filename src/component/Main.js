@@ -1,12 +1,20 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import RestaurantCard from './RestaurantCard'
+import RestaurantCard,{cardWithDiscount} from './RestaurantCard'
 import Shimmer from './Shimmer'
+import { Link } from 'react-router-dom'
+import useOnlineStatus from '../utils/hooks/useOnlineStatus'
+
 
 const Main = () => {
     const [resList,setResList] = useState([]);
     const [filteredList,setFilteredList] = useState([])
     const [searchText, setSearchText] = useState('')
+    
+    const RestaurantCardPromoted = cardWithDiscount(RestaurantCard)
+
+  //   const [filteredArray, setFilteredArray] = useState([]);
+  // const [isFiltered, setIsFiltered] = useState(false);
 
     useEffect(() =>{
         fetchRestro()
@@ -19,13 +27,34 @@ const fetchRestro = async() =>{
       //console.log(json)
       setResList(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
       setFilteredList(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
+     // setFilteredArray(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
       //console.log(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
 }
-const filtered = () =>{
+const handleToggle = () =>{
   const filteredRestro = resList.filter((res) => res.info.avgRating > 4.4);
-  // !resList ? setResList(filteredRestro) :setResList(resList) 
   setFilteredList(filteredRestro);
 }
+
+const onlineStatus = useOnlineStatus()
+if(onlineStatus === false){
+  return (
+    <h1>You're Offline</h1>
+  )
+}
+// const handleToggle = () => {
+//   if (isFiltered) {
+//     // If currently filtered, switch to the original array
+//     setFilteredArray(null);
+//   } else {
+//     // If not filtered, apply your filter condition here
+//     // For example, let's filter out items with a specific property
+//     const filteredItems = resList.filter(item => item.info.avgRating > 4.4);
+//     setFilteredArray(filteredItems);
+//   }
+
+//   // Toggle the filter state
+//   setIsFiltered(!isFiltered);
+// };
     
   return resList.length === 0 ? <Shimmer/> : (
     <div className='h-auto w-full bg-slate-200'>
@@ -41,11 +70,18 @@ const filtered = () =>{
               }}>Search</button>
              
             </div>
-                 <button onClick={filtered} className='border border-black p-3 m-3 active:bg-slate-400 hover:bg-slate-400'>Top Rated</button>
+              
+                 <button onClick={handleToggle} className='border border-black p-3 m-3 active:bg-slate-400 hover:bg-slate-400'>Top Rated</button>
              </div>
              <div className='flex flex-wrap gap-5 '>
-             {filteredList.map((lists) => (
-                <RestaurantCard resData={lists}/>
+               {/* isFiltered ?
+                 filteredArray.map((lists) => (
+           <Link key={lists.info.id} to={'/restaurant' + lists.info.id}> <RestaurantCard  resData={lists}/></Link>
+             )): */}
+              {filteredList.map((lists) => (
+              <Link key={lists.info.id} to={'/restaurants/' + lists.info.id}> 
+              {lists.info.aggregatedDiscountInfoV3 ? <RestaurantCardPromoted resData={lists}/>: <RestaurantCard  resData={lists}/>}
+              </Link>
              ))}
              </div>
         </div>
