@@ -1,9 +1,10 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import RestaurantCard,{cardWithDiscount} from './RestaurantCard'
 import Shimmer from './Shimmer'
 import { Link } from 'react-router-dom'
 import useOnlineStatus from '../utils/hooks/useOnlineStatus'
+import userContext from '../utils/context/userContext'
 
 
 const Main = () => {
@@ -11,6 +12,8 @@ const Main = () => {
     const [filteredList,setFilteredList] = useState([])
     const [searchText, setSearchText] = useState('')
     
+   const {loggedInUser,setUserName} = useContext(userContext)
+
     const RestaurantCardPromoted = cardWithDiscount(RestaurantCard)
 
   //   const [filteredArray, setFilteredArray] = useState([]);
@@ -56,10 +59,10 @@ if(onlineStatus === false){
 //   setIsFiltered(!isFiltered);
 // };
     
-  return resList.length === 0 ? <Shimmer/> : (
+  return  resList.length === 0 ? <Shimmer/> : (
     <div className='h-auto w-full bg-slate-200'>
         <div className='max-w-screen-lg mx-auto'>
-             <div className='h-20 flex items-center '>
+             <div className='h-20 flex items-center justify-around pt-4'>
             <div>
               <input type="text" className='py-3 pr-4' value={searchText} onChange={(e) => {
                 setSearchText(e.target.value)
@@ -68,12 +71,15 @@ if(onlineStatus === false){
                    const searchedRestro = resList.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()))
                    setFilteredList(searchedRestro);
               }}>Search</button>
-             
+               
             </div>
               
                  <button onClick={handleToggle} className='border border-black p-3 m-3 active:bg-slate-400 hover:bg-slate-400'>Top Rated</button>
+                 <span className=' px-2 py-1'>
+                 <label>UserName : </label>
+                 <input className='px-2 y-1' type="search"  value={loggedInUser} onChange={(e) => setUserName(e.target.value)} /></span>
              </div>
-             <div className='flex flex-wrap gap-5 '>
+             <div className='flex flex-wrap gap-5 pt-11'>
                {/* isFiltered ?
                  filteredArray.map((lists) => (
            <Link key={lists.info.id} to={'/restaurant' + lists.info.id}> <RestaurantCard  resData={lists}/></Link>
