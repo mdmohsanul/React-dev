@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+*{
+box-sizing: border-box;
+}.logo{
+    mix-blend-mode: darken;
+}
+.boxShadow{
+    box-shadow:  0 15px 40px -20px rgba(40,44,63,.15);
+}
