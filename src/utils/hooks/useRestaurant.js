@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const useRestaurant = () => {
   const [circleCarouselCards, setCircleCarouselCards] = useState([]);
+  const [carouselCards, setCarouselCards] = useState([]);
   const [resList, setResList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
 
@@ -26,13 +27,23 @@ const useRestaurant = () => {
     setCircleCarouselCards(
       json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info
     );
+    setCarouselCards(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
 
-    // setFilteredArray(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
-    // console.log(
-    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // // console.log(
+    // //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants.info.badges.includes(
+    // //     "pureveg"
+    // //   )
     // );
   };
-  return { resList, filteredList, setFilteredList, circleCarouselCards };
+  return {
+    resList,
+    filteredList,
+    setFilteredList,
+    circleCarouselCards,
+    carouselCards,
+  };
 };
 
 export default useRestaurant;

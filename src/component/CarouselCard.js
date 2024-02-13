@@ -1,12 +1,11 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
-import CircularBtn from "./CircularBtn";
-
+import React, { useRef, useState, useEffect } from "react";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
-import { CARD_URL } from "../utils/constants";
+import useRestaurant from "../utils/hooks/useRestaurant";
+import { CDN_URL } from "../utils/constants";
+import RestaurantCard from "./RestaurantCard";
 
-const Header = ({ circleCarouselCards }) => {
+const CarouselCard = ({ carouselCards }) => {
   const carousel = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,12 +32,13 @@ const Header = ({ circleCarouselCards }) => {
     }
   }, [currentIndex]);
 
+  console.log(carouselCards);
   return (
     <>
-      <div className="border-b-[3px] border-[#f0f0f5] pb-7">
+      <div className="border-b-[3px] border-[#f0f0f5] pb-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold spacing tracking-[-0.4px]">
-            What's on your mind
+          <h1 className="text-2xl font-bold spacing tracking-[-0.4px] py-6">
+            Top restaurant chains in Bangalore
           </h1>
           <span className="flex items-center gap-3">
             <button
@@ -61,13 +61,8 @@ const Header = ({ circleCarouselCards }) => {
           ref={carousel}
           className="flex gap-8 overflow-hidden scroll-smooth"
         >
-          {circleCarouselCards.map((item) => (
-            <img
-              key={item.id}
-              className="object-center h-44 w-36 transition-transform hover:scale-110 duration-200 mix-blend-multiply cursor-pointer"
-              src={CARD_URL + item.imageId}
-              alt="card img"
-            />
+          {carouselCards.map((item) => (
+            <RestaurantCard key={item.info.id} resData={item} />
           ))}
         </div>
       </div>
@@ -75,4 +70,4 @@ const Header = ({ circleCarouselCards }) => {
   );
 };
 
-export default Header;
+export default CarouselCard;
