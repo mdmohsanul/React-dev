@@ -4,19 +4,19 @@ export const filterList = [
     name: "Sort",
   },
   {
-    id: 1,
+    id: 2,
     name: "Delivery Time",
   },
   {
-    id: 1,
+    id: 3,
     name: "Cuisines",
   },
   {
-    id: 1,
+    id: 4,
     name: "Ratings",
   },
   {
-    id: 1,
+    id: 5,
     name: "Veg/Non-Veg",
   },
 ];

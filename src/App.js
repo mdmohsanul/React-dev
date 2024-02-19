@@ -10,13 +10,11 @@ import Cart from "./Page/Cart";
 import Error from "./component/Error";
 import RestaurantMenu from "./component/RestaurantMenu";
 import userContext from "./utils/context/userContext";
-
 import { Provider } from "react-redux";
 import appStore from "./utils/Redux/appStore";
 
-//nav links -- search page offersPage helpPage cartPage
 //Lazy Loading (help)
-const Help = lazy(() => import("./Page/Help"));
+//const Help = lazy(() => import("./Page/Help"));
 
 const AppLayout = () => {
   //changing the value of userContext
