@@ -8,6 +8,8 @@ import useRestaurant from "../utils/hooks/useRestaurant";
 import Button from "../component/Button";
 import { PiSlidersHorizontalDuotone } from "react-icons/pi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { IoCloseSharp } from "react-icons/io5";
+import FilterMenu from "../component/Filter/FilterMenu";
 const Main = () => {
   //calling custom hook for api call
   const { resList, filteredList, setFilteredList } = useRestaurant();
@@ -67,44 +69,32 @@ const Main = () => {
           <Button name="Rating 4.0+" onClick={topRatedFilter} />
           <Button name="Offers" />
           <Button name="Pure Veg" onClick={vegFilter} />
+          <div>
+            <input
+              type="text"
+              className="py-3 px-4 shadow-md outline outline-1 rounded-lg"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
+            <button
+              className="ml-5 font-semibold text-[#3d3333] text-lg"
+              onClick={() => {
+                const searchedRestro = resList.filter((res) =>
+                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                );
+                setFilteredList(searchedRestro);
+              }}
+            >
+              Search
+            </button>
+          </div>
         </div>
         {/* Modal */}
-        {isModalVisible && (
-          <div>
-            <div className="h-96 w-2/6 bg-red-500  z-20  mx-auto fixed top-1/4 left-1/4">
-              <div className="flex justify-between px-3 border-[#f0f0f5] pb-4">
-                <h1>Filter</h1>
-                <span className="close cursor-pointer" onClick={toggleModal}>
-                  &times;
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        {isModalVisible && <FilterMenu onClick={toggleModal} />}
       </div>
       <div className="h-20 flex items-center justify-around pt-4">
-        <div>
-          <input
-            type="text"
-            className="py-3 pr-4"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            className="ml-3"
-            onClick={() => {
-              const searchedRestro = resList.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              setFilteredList(searchedRestro);
-            }}
-          >
-            Search
-          </button>
-        </div>
-
         <span className=" px-2 py-1">
           <label>UserName : </label>
           <input
@@ -130,8 +120,9 @@ const Main = () => {
           </Link>
         ))}
       </div>
+
       {isModalVisible && (
-        <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.6)] opacity-80 z-10"></div>
+        <div className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.6)] backdrop-blur-sm z-40"></div>
       )}
     </div>
   );

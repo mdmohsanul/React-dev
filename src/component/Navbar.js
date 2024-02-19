@@ -21,7 +21,7 @@ const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
   return (
     <>
-      <div className=" bg-white w-full  fixed top-0 z-10 boxShadow	">
+      <div className=" bg-white w-full  fixed top-0 z-30 boxShadow	">
         <div className="max-w-[1350px]  mx-auto ">
           <div className="flex items-center justify-between ">
             <div className="bg-slate-300 ">

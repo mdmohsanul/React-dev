@@ -12,12 +12,12 @@ const RestaurantCard = (props) => {
     resData?.info;
 
   return (
-    <div className="w-60  p-2  hover:cursor-pointer ">
+    <div className="w-60  p-2  transition-transform hover:scale-95 duration-300 relative">
       <div className=" w-full object-cover ">
         <img
           src={CDN_URL + cloudinaryImageId}
           alt=""
-          className="w-full  h-32 rounded-lg"
+          className="w-full  h-32 rounded-lg object-cover"
         />
       </div>
       <div className="p-2">
@@ -45,7 +45,9 @@ export const cardWithDiscount = (RestaurantCard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute p-1 bg-black text-white">Promoted</label>
+        <label className="absolute  p-1 bg-black text-white z-20">
+          Promoted
+        </label>
         <RestaurantCard {...props} />
       </div>
     );

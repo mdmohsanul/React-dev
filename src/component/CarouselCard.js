@@ -59,10 +59,14 @@ const CarouselCard = ({ carouselCards }) => {
         </div>
         <div
           ref={carousel}
-          className="flex gap-8 overflow-hidden scroll-smooth"
+          className="flex gap-8 overflow-hidden scroll-smooth "
         >
           {carouselCards.map((item) => (
-            <RestaurantCard key={item.info.id} resData={item} />
+            <RestaurantCard
+              key={item.info.id}
+              resData={item}
+              className="bg-black"
+            />
           ))}
         </div>
       </div>

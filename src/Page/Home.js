@@ -11,7 +11,7 @@ const Home = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="h-auto w-full bg-white mt-24 relative">
+      <div className="h-auto w-full bg-white mt-24 ">
         <div className="max-w-screen-lg mx-auto">
           <Header circleCarouselCards={circleCarouselCards} />
           <CarouselCard carouselCards={carouselCards} />
