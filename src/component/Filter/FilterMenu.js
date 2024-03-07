@@ -6,8 +6,23 @@ const FilterMenu = ({ onClick }) => {
   const list = filterList;
   const [sort, setSort] = useState(false);
   const [veg, setVeg] = useState(false);
-  const showContent = () => {
+  const [filter, setfilter] = useState(false);
+  const [delivery, setdelivery] = useState(false);
+  const [rating, setrating] = useState(false);
+  const filterContent = () => {
+    setfilter(true);
+  };
+  const sortContent = () => {
     setSort(true);
+  };
+  const deliveryContent = () => {
+    setdelivery(true);
+  };
+  const ratingContent = () => {
+    setrating(true);
+  };
+  const vegContent = () => {
+    setVeg(true);
   };
   return (
     <>
@@ -25,20 +40,19 @@ const FilterMenu = ({ onClick }) => {
           <div className="grid grid-cols-3 ">
             <div className="col-span-1   border-r-2 border-[#b0b0be]">
               <ul className="flex flex-col cursor-pointer gap-5 text-lg font-semibold items-start justify-center text-[#584747] pl-7 pt-5 pb-3">
-                {list.map((list) => (
-                  <li key={list.id} onClick={showContent}>
-                    {list.name}
-                  </li>
-                ))}
+                <li onClick={filterContent}>Filter</li>
+                <li onClick={sortContent}>Sort</li>
+                <li onClick={deliveryContent}>Delivery</li>
+                <li onClick={ratingContent}>Ratings</li>
+                <li onClick={vegContent}>Veg</li>
               </ul>
             </div>
             <div className="col-span-2">
-              {sort && <div>Hiiii</div>}
-              {veg && <div>iii</div>}
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+              {filter && <div>filterdata</div>}
+              {sort && <div>sortdata</div>}
+              {delivery && <div>deliveryada</div>}
+              {rating && <div>ratings data</div>}
+              {veg && <div>vag dada</div>}
             </div>
           </div>
         </div>
